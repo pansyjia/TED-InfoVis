@@ -1,6 +1,3 @@
-//var width = 900;  //declares width of container variable and assigns it a value of 960
-//var height = 600; //declares height of container variable and assigns it value of 100
-//var rectWidth = 15;       //sets rectWidth variable to be 20
 
 var data = [];
 var val
@@ -26,11 +23,12 @@ var selectValue = "3d printing";
 
 $(document).ready(function() {
   console.log("yo");
-  loadData();
+  // loadData1();
+  loadData2();
 });
 
-// Loads the CSV file
-function loadData() {
+// // Loads the CSV file
+function loadData1() {
   console.log("HEY");
   // load the csv file
   // assign it to the data variable
@@ -72,13 +70,27 @@ function loadData() {
 
   });
 
-
-
-
 }
 
 
 
+/////data for drawing scatter plot
+function loadData2() {
+    d3.csv("data/ted_ratings.csv", function (d) {
+        data = d;
+        data.forEach(function (item) {
+            item.n = parseInt(item.n);
+        });
+
+        drawScatterPlot(data);
+    });
+}
+
+
+
+////////////////////////////////////
+/////Small Multiples///////
+////////////////////////////////////
 function getTopTalks(category, data) {
   console.log(category);
   //set up margin and scale
@@ -237,5 +249,92 @@ function setDropdownOptions(data) {
     .text(function(d, i) {
       return (talk_categories[i]);
     });
+
+}
+
+
+
+////////////////////////////////////
+/////Scatter Plot///////
+function drawScatterPlot(data) {
+
+  // var x="Beautiful";
+  // var y="Confusing";
+
+  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+  width = $("#scatterTransition3").width()  - margin.left - margin.right,
+  height = $("#scatterTransition3").height()  - margin.top - margin.bottom;
+
+  // set the ranges
+  var x = d3.scaleLinear().range([0, width]);
+  var y = d3.scaleLinear().range([height, 0]);
+
+  // append the svg obgect to canvas
+  // appends a 'group' element to 'svg'
+  // moves the 'group' element to the top left margin
+  var svg = d3.select("#scatterTransition3")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+  // Scale the range of the data
+  x.domain([0, d3.max(data, function(d) { return d.Beautiful; })]);
+  y.domain([0, d3.max(data, function(d) { return d.Confusing; })]);
+
+   ///gradient color -> distance 
+  //  var color = d3.scaleSequential(d3.interpolateReds).domain([0,d3.max(data, function(d) { return d.views; })]);
+
+  var tooltip = d3.select("#scatterTransition3").append("div").attr("class", "toolTip");
+
+  // Add the scatterplot
+  svg.selectAll("dot")
+      .data(data)
+      .enter().append("circle")
+      .attr("r", 3)
+      // .attr("fill", function(d,i) { return color(d.views)})
+      .attr("fill", "#e62b1e")
+      .attr("cx", function(d) { return x(d.Beautiful); })
+      .attr("cy", function(d) { return y(d.Confusing); })
+      .attr("opacity", "1")
+      .on("mousemove", function (d) {
+              d3.select(this).attr("opacity", "0.7");
+              tooltip.style("left", d3.event.pageX - 50 + "px")
+                  .style("top", d3.event.pageY - 100 + "px")
+                  .style("display", "inline-block")
+                  .html("<div><b>" +"Title" + "</b> : " + (d.title) + "</div> " + "<b>" +"Speaker" + "</b> : " + (d.main_speaker));
+      })
+      .on("mouseout", function (d) {
+              d3.select(this).attr("opacity", "1");
+              tooltip.style("display", "none");
+      });
+
+  // Add the X Axis
+  svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+     // text label for the x axis
+     svg.append("text")             
+     .attr("transform",
+     "translate(" + (width/2) + " ," + 
+                    (height + margin.top/2 + 20) + ")")
+     .style("text-anchor", "middle")
+     .text("Beautiful");
+
+    // Add the y Axis
+    svg.append("g")
+        .call(d3.axisLeft(y));
+    
+    // text label for the y axis
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Confusing"); 
+
 
 }
