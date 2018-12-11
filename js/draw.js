@@ -19,6 +19,8 @@ var category_colors = {
   "OK": "rgb(93, 126, 230)"
 }
 
+var rating_names = ["Beautiful", "Confusing", "Courageous", "Fascinating", "Funny", "Informative", "Ingenious", "Inspiring", "Jaw.dropping", "Longwinded", "OK", "Obnoxious", "Persuasive", "Unconvincing"]
+
 var selectValue = "3d printing";
 
 $(document).ready(function() {
@@ -95,26 +97,20 @@ function getTopTalks(category, data) {
   console.log(category);
   //set up margin and scale
   var margin = {
-      top: 20,
-      right: 20,
+      top: 10,
+      right: 10,
       bottom: 80,
-      left: 60
+      left: 20
     },
-    width = 500 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+    width = 350 - margin.left - margin.right,
+    height = 250 - margin.top - margin.bottom;
 
-  var x = d3.scaleBand()
-    .range([0, width])
-    .padding(0.1);
+  var x = d3.scaleBand().range([0, width]).padding(0.1);
 
-  var y = d3.scaleLinear()
-    .range([height, 0]);
+  var y = d3.scaleLinear().range([height, 0]);
 
   var counter = 0;
   var item_array;
-  var rating_names = ["Beautiful", "Confusing", "Courageous", "Fascinating", "Funny", "Informative", "Ingenious", "Inspiring", "Jaw.dropping", "Longwinded", "OK", "Obnoxious", "Persuasive", "Unconvincing"]
-
-
 
   data.forEach(function(d, i) {
     var dict = [];
@@ -122,7 +118,7 @@ function getTopTalks(category, data) {
     var category_text = d['tags'].split(',')[0].toLowerCase();
 
 
-    if (category_text == category && counter <= 4) //if there is a match, display link & tite of talk
+    if (category_text == category && counter <= 5) //if there is a match, display link & tite of talk
     {
       item_array = [];
       var list = "";
@@ -137,7 +133,7 @@ function getTopTalks(category, data) {
       dict.sort(function(a, b) {
         return b["value"] - a["value"];
       });
-      console.log(dict)
+      // console.log(dict)
 
       //create list
       list += '<br>';
@@ -162,12 +158,8 @@ function getTopTalks(category, data) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      x.domain(dict.map(function(d) {
-        return d.key;
-      }));
-      y.domain([0, d3.max(dict, function(d) {
-        return d.value;
-      })]);
+      x.domain(dict.map(function(d) {return d.key;}));
+      y.domain([0, d3.max(dict, function(d) {return d.value; })]);
 
       var tooltip = d3.select("body")
         .append("div")
