@@ -1,22 +1,22 @@
-
+var f = d3.format(".1f");
 var data = [];
 var val
 var talk_categories = ["art"];
 var category_colors = {
-  "Beautiful": "#5EB731",
-  "Courageous": "#5EB731",
-  "Fascinating": "#5EB731",
-  "Funny": "#5EB731",
-  "Informative": "#5EB731",
-  "Ingenious": "#5EB731",
-  "Inspiring": "#5EB731",
-  "Jaw.dropping": "rgb(93, 126, 230)",
-  "Persuasive": "#5EB731",
-  "Confusing": "#555555",
-  "Longwinded": "#555555",
-  "Obnoxious": "#555555",
-  "Unconvincing": "#555555",
-  "OK": "rgb(93, 126, 230)"
+  "Beautiful": "#e62b1e",
+  "Courageous": "#e62b1e",
+  "Fascinating": "#e62b1e",
+  "Funny": "#e62b1e",
+  "Informative": "#e62b1e",
+  "Ingenious": "#e62b1e",
+  "Inspiring": "#e62b1e",
+  "Jaw.dropping": "#feac9d",
+  "Persuasive": "#e62b1e",
+  "Confusing":"#888888",
+  "Longwinded": "#888888",
+  "Obnoxious": "#888888",
+  "Unconvincing": "#888888",
+  "OK": "#feac9d"
 }
 
 var rating_names = ["Beautiful", "Confusing", "Courageous", "Fascinating", "Funny", "Informative", "Ingenious", "Inspiring", "Jaw.dropping", "Longwinded", "OK", "Obnoxious", "Persuasive", "Unconvincing"]
@@ -28,6 +28,7 @@ $(document).ready(function() {
   loadData1();
   loadData2();
 });
+
 
 // // Loads the CSV file
 function loadData1() {
@@ -79,12 +80,12 @@ function loadData1() {
 /////data for drawing scatter plot
 function loadData2() {
     d3.csv("data/ted_ratings.csv", function (d) {
-        data = d;
-        data.forEach(function (item) {
+        s_data = d;
+        s_data.forEach(function (item) {
             item.n = parseInt(item.n);
         });
 
-        drawScatterPlot(data);
+        drawScatterPlot(s_data);
     });
 }
 
@@ -185,10 +186,10 @@ function getTopTalks(category, data) {
         .attr("height", function(d) {
           return height - y(d.value);
         })
-        .attr("opacity", "0.6")
+        .attr("opacity", "1")
         .on("mousemove", function(d) {
           $("[id= '" + d.key + "']").addClass("highlight");
-          tooltip
+        tooltip
             .style("left", d3.event.pageX - 80 + "px")
             .style("top", d3.event.pageY - 100 + "px")
             .style("display", "inline-block")
@@ -250,8 +251,8 @@ function setDropdownOptions(data) {
 /////Scatter Plot///////
 function drawScatterPlot(data) {
 
-  // var x="Beautiful";
-  // var y="Confusing";
+  // var xraing=Beautiful;
+  // var yrating=Confusing;
 
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = $("#scatterTransition3").width()  - margin.left - margin.right,
@@ -274,7 +275,7 @@ function drawScatterPlot(data) {
   y.domain([0, d3.max(data, function(d) { return d.Confusing; })]);////////replace here/////////
 
    ///gradient color -> distance 
-  //  var color = d3.scaleSequential(d3.interpolateReds).domain([0,d3.max(data, function(d) { return d.views; })]);
+   var color = d3.scaleSequential(d3.interpolateInferno).domain([0,d3.max(data, function(d) { return d.views; })]);
 
   var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
@@ -283,8 +284,9 @@ function drawScatterPlot(data) {
       .data(data)
       .enter().append("circle")
       .attr("r", 3)
-      // .attr("fill", function(d,i) { return color(d.views)})
-      .attr("fill", "#e62b1e")
+
+      .attr("fill", function(d) { return color(d.views)})
+      // .attr("fill", "#e62b1e")
       .attr("cx", function(d) { return x(d.Beautiful); })////////replace here/////////
       .attr("cy", function(d) { return y(d.Confusing); })////////replace here/////////
       .attr("opacity", "1")
@@ -293,7 +295,7 @@ function drawScatterPlot(data) {
               tooltip.style("left", d3.event.pageX - 50 + "px")
                   .style("top", d3.event.pageY - 100 + "px")
                   .style("display", "inline-block")
-                  .html("<div><b>" +"Title" + "</b> : " + (d.title) + "</div> " + "<b>" +"Speaker" + "</b> : " + (d.main_speaker));
+                  .html("<div><b>" +"Title" + "</b> : " + (d.title) + "</div> " + "<div><b>" +"Main Speaker" + "</b> : " + (d.main_speaker)+ "</div> " +"<div><b>" + "Views" + "</b> : " + (d.views) + "</div> ");
       })
       .on("mouseout", function (d) {
               d3.select(this).attr("opacity", "1");
@@ -311,7 +313,7 @@ function drawScatterPlot(data) {
      "translate(" + (width/2) + " ," + 
                     (height + margin.top/2 + 20) + ")")
      .style("text-anchor", "middle")
-     .text("Beautiful");
+     .text("Beautiful"); /////replace x here
 
     // Add the y Axis
     svg.append("g")
@@ -324,7 +326,7 @@ function drawScatterPlot(data) {
         .attr("x",0 - (height / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
-        .text("Confusing"); 
+        .text("Confusing"); /////replace y here
 
 
 }
