@@ -77,15 +77,33 @@ function loadData1() {
 
 
 
+
 /////data for drawing scatter plot
 function loadData2() {
     d3.csv("data/ted_ratings.csv", function (d) {
-        s_data = d;
-        s_data.forEach(function (item) {
-            item.n = parseInt(item.n);
+        data2 = d;
+        data2.forEach(function (talk) {
+            talk.Beautiful = parseInt(talk.Beautiful);
+            talk.Confusing = parseInt(talk.Confusing);
+            talk.Courageous = parseInt(talk.Courageous);
+            talk.Fascinating = parseInt(talk.Fascinating);
+            talk.Funny = parseInt(talk.Funny);
+            talk.Informative = parseInt(talk.Informative);
+            talk.Ingenious = parseInt(talk.Ingenious);
+            talk.Inspiring = parseInt(talk.Inspiring);
+            // talk.Jaw.dropping = parseInt(talk.Jaw.dropping);
+            talk.Longwinded = parseInt(talk.Longwinded);
+            talk.OK = parseInt(talk.OK);
+            talk.Obnoxious = parseInt(talk.Obnoxious);
+            talk.Persuasive = parseInt(talk.Persuasive);
+            talk.Unconvincing = parseInt(talk.Unconvincing);
+
+            talk.main_rating = parseInt(talk.main_rating);
+            talk.views = parseInt(talk.views);
+            talk.N_views = parseInt(talk.N_views);
         });
 
-        drawScatterPlot(s_data);
+        drawScatterPlot(data2);
     });
 }
 
@@ -249,10 +267,10 @@ function setDropdownOptions(data) {
 
 ////////////////////////////////////
 /////Scatter Plot///////
-function drawScatterPlot(data) {
+function drawScatterPlot(data2,xrat,yrat) {
 
-  // var xraing=Beautiful;
-  // var yrating=Confusing;
+  var xraing=xrat; ////
+  var yrating=yrat;
 
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = $("#scatterTransition3").width()  - margin.left - margin.right,
@@ -271,8 +289,10 @@ function drawScatterPlot(data) {
 
 
   // Scale the range of the data
-  x.domain([0, d3.max(data, function(d) { return d.Beautiful; })]);////////replace here/////////
-  y.domain([0, d3.max(data, function(d) { return d.Confusing; })]);////////replace here/////////
+  x.domain([0, d3.max(data2, function(d) { 
+    return d.Beautiful; 
+  })]);////////replace here/////////
+  y.domain([0, d3.max(data2, function(d) { return d.Confusing; })]);////////replace here/////////
 
    ///gradient color -> distance 
    var color = d3.scaleSequential(d3.interpolateInferno).domain([0,d3.max(data, function(d) { return d.views; })]);
@@ -281,12 +301,12 @@ function drawScatterPlot(data) {
 
   // Add the scatterplot
   svg.selectAll("dot")
-      .data(data)
+      .data(data2)
       .enter().append("circle")
-      .attr("r", 3)
-
-      .attr("fill", function(d) { return color(d.views)})
-      // .attr("fill", "#e62b1e")
+      // .attr("r", 3)
+      .attr("r", function(d){return Math.sqrt((d.views)/200000)})
+      // .attr("fill", function(d) { return color(d.views)})
+      .attr("fill", "#e62b1e")
       .attr("cx", function(d) { return x(d.Beautiful); })////////replace here/////////
       .attr("cy", function(d) { return y(d.Confusing); })////////replace here/////////
       .attr("opacity", "1")
