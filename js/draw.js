@@ -269,9 +269,7 @@ function drawScatterPlot(data) {
   var x = d3.scaleLinear().range([0, width]);
   var y = d3.scaleLinear().range([height, 0]);
 
-  // append the svg obgect to canvas
-  // appends a 'group' element to 'svg'
-  // moves the 'group' element to the top left margin
+  // append the svg obgect to canvas, appends a 'group' element to 'svg'. moves the 'group' element to the top left margin
   var svg = d3.select("#scatterTransition3")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
@@ -280,13 +278,13 @@ function drawScatterPlot(data) {
 
 
   // Scale the range of the data
-  x.domain([0, d3.max(data, function(d) { return d.Beautiful; })]);
-  y.domain([0, d3.max(data, function(d) { return d.Confusing; })]);
+  x.domain([0, d3.max(data, function(d) { return d.Beautiful; })]);////////replace here/////////
+  y.domain([0, d3.max(data, function(d) { return d.Confusing; })]);////////replace here/////////
 
    ///gradient color -> distance 
   //  var color = d3.scaleSequential(d3.interpolateReds).domain([0,d3.max(data, function(d) { return d.views; })]);
 
-  var tooltip = d3.select("#scatterTransition3").append("div").attr("class", "toolTip");
+  var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
   // Add the scatterplot
   svg.selectAll("dot")
@@ -295,8 +293,8 @@ function drawScatterPlot(data) {
       .attr("r", 3)
       // .attr("fill", function(d,i) { return color(d.views)})
       .attr("fill", "#e62b1e")
-      .attr("cx", function(d) { return x(d.Beautiful); })
-      .attr("cy", function(d) { return y(d.Confusing); })
+      .attr("cx", function(d) { return x(d.Beautiful); })////////replace here/////////
+      .attr("cy", function(d) { return y(d.Confusing); })////////replace here/////////
       .attr("opacity", "1")
       .on("mousemove", function (d) {
               d3.select(this).attr("opacity", "0.7");
@@ -310,8 +308,8 @@ function drawScatterPlot(data) {
               tooltip.style("display", "none");
       });
 
-  // Add the X Axis
-  svg.append("g")
+    // Add the X Axis
+    svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
