@@ -1,3 +1,4 @@
+
 var f = d3.format(".1f");
 var data = [];
 var val
@@ -24,7 +25,7 @@ var rating_names = ["Beautiful", "Confusing", "Courageous", "Fascinating", "Funn
 var selectValue = "3d printing";
 
 $(document).ready(function() {
-  console.log("yo");
+  // console.log("loaddata begin");
   loadData1();
   loadData2();
 });
@@ -32,7 +33,7 @@ $(document).ready(function() {
 
 // // Loads the CSV file
 function loadData1() {
-  console.log("HEY");
+  // console.log("HEY");
   // load the csv file
   // assign it to the data variable
   d3.csv("data/ted_clean.csv", function(d) {
@@ -109,9 +110,9 @@ function loadData2() {
 
 
 
-////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 /////Small Multiples///////
-////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 function getTopTalks(category, data) {
   console.log(category);
   //set up margin and scale
@@ -265,12 +266,13 @@ function setDropdownOptions(data) {
 
 
 
-////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 /////Scatter Plot///////
-function drawScatterPlot(data2,xrat,yrat) {
-
-  var xraing=xrat; ////
-  var yrating=yrat;
+//////////////////////////////////////////////////////////////////
+function drawScatterPlot(data2) {
+  // drawScatterPlot(data2,xrat,yrat)
+  // var xraing=xrat; 
+  // var yrating=yrat;
 
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = $("#scatterTransition3").width()  - margin.left - margin.right,
@@ -289,13 +291,18 @@ function drawScatterPlot(data2,xrat,yrat) {
 
 
   // Scale the range of the data
-  x.domain([0, d3.max(data2, function(d) { 
-    return d.Beautiful; 
-  })]);////////replace here/////////
+  x.domain([0, d3.max(data2, function(d) { return d.Beautiful; })]);////////replace here/////////
   y.domain([0, d3.max(data2, function(d) { return d.Confusing; })]);////////replace here/////////
 
    ///gradient color -> distance 
-   var color = d3.scaleSequential(d3.interpolateInferno).domain([0,d3.max(data, function(d) { return d.views; })]);
+  var color = d3.scaleSequential(d3.interpolateViridis).domain([0,d3.max(data, function(d) { return d.views; })]);
+  
+//   const logScale = d3.scaleLog()
+//   .domain([1, 1000])
+// const colorScaleLog = d3.scaleSequential(
+//     (d) => d3.interpolateReds(logScale(d))
+//   ) 
+
 
   var tooltip = d3.select("body").append("div").attr("class", "toolTip");
 
@@ -305,8 +312,8 @@ function drawScatterPlot(data2,xrat,yrat) {
       .enter().append("circle")
       // .attr("r", 3)
       .attr("r", function(d){return Math.sqrt((d.views)/200000)})
-      // .attr("fill", function(d) { return color(d.views)})
-      .attr("fill", "#e62b1e")
+      .attr("fill", function(d) { return color(d.views)})
+      // .attr("fill", "#e62b1e")
       .attr("cx", function(d) { return x(d.Beautiful); })////////replace here/////////
       .attr("cy", function(d) { return y(d.Confusing); })////////replace here/////////
       .attr("opacity", "1")
