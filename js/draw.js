@@ -23,7 +23,7 @@ var selectValue = "3d printing";
 
 $(document).ready(function() {
   console.log("yo");
-  // loadData1();
+  loadData1();
   loadData2();
 });
 
