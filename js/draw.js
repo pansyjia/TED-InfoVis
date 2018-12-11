@@ -204,7 +204,7 @@ function getTopTalks(category, data) {
         .attr("height", function(d) {
           return height - y(d.value);
         })
-        .attr("opacity", "1")
+        .attr("opacity", "0.8")
         .on("mousemove", function(d) {
           $("[id= '" + d.key + "']").addClass("highlight");
         tooltip
