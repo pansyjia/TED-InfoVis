@@ -355,7 +355,7 @@ function drawScatterPlot(data2,x,y) {
               tooltip.style("left", d3.event.pageX - 50 + "px")
                   .style("top", d3.event.pageY - 120 + "px")
                   .style("display", "inline-block")
-                  .html("<div><b>" +"Title" + "</b> : " + (d.title) + "</div> " + "<div><b>" +"Main Speaker" + "</b> : " + (d.main_speaker)+ "</div> " +"<div><b>" + "Views" + "</b> : " + (d.views) + "</div> ");
+                  .html("<div><b>" +"Title" + "</b> : " + (d.title) + "</div> " + "<div><b>" +"Main Speaker" + "</b> : " + (d.main_speaker)+ "</div> " +"<div><b>" + "Speaker's Occupation" + "</b> : " + (d.speaker_occupation) + "</div> ");
       })
       .on("mouseout", function (d) {
             d3.select(this).attr("fill", function(d) { return color(d.views)});
