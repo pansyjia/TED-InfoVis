@@ -164,17 +164,6 @@ button:hover  {
     border: 0.5px solid #808080!important;
 }
 
-#divScatter1 {
-  height: 350px;
-}
-
-#divScatter2 {
-    height: 350px;
-  }
-
-#divScatter3 {
-    height: 450px;
-}
 
 text {
     font-size: 11px;
