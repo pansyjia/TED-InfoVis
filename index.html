@@ -23,8 +23,8 @@
     <div class="row">
         <div class="twelve columns" style="background-color: black; color: white; text-align: center; padding-top: 60px; padding-bottom: 100px;">
         <h1><img src="img/logo.png" class= "logo" alt="TED_logo" height="30"></h1>
-        <h1>How TED Talks spread ideas worth spreading?</h1>
-        <h2>What can we learn from Ted Talk ratings</h2>
+        <h1>"Ideas worth spreading" - What are the secrets behind TED Talk styles?</h1>
+        <h2>A closer look at Ted Talk ratings</h2>
         </div>
     </div>
 
@@ -36,9 +36,11 @@
             <h3>Introduction</h3>
              <p> TED talks are short, powerful talks (18 minutes or less) from expert speakers around the world. Under the slogan "Idea worth spreading", TED talks cover nearly all topics you can think of: education, business, science, tech, creativity, global issues, and many more. Nowadays TED Talks have successfully spreaded thousands of ideas to billions of people around the globe.</p>
 
-             <p>As TED Talk lovers, we were curious about what makes TED Talks so successful. On the level of a specific talk, what attribute / strategy is related to its success.</p>
+             <p>TED Website uses post-video question to collect audience's reaction towards a talk. At the end of each TED Talk video, user will be prompted to select one option from 14 categories under the question "How would you describe this talk"? These 14 categories are: Beautiful, Courageous, Fascinating, Funny, Informative, Ingenious, Inspiring, Persuasive, Confusing, Longwinded, Obnoxious, Unconvincing, OK, Jaw-dropping. Overtime, the number of "votes" for each category are aggregated as rating.</p>
 
-             <p>Our team got a dataset which contains detailed information about 2550 TED Talks. For each talk we have data on number of view and 14 rating (voting) categories. These ratings com from TED official website where user can select one option under the question "How would you describe this talk?".</p>
+             <p>Our team got a dataset which contains detailed information about 2550 TED Talks, which includes number of views, number of comments, description, tags, and also rating for each of the 14 categories. We looked into this dataset with specific interest in the 14 ratings and we expect to answer the following questions:</p>
+
+             <p>Which style can best characterize TED Talk?</p>
 
 
              <div class="six columns offset-by-one">
@@ -49,12 +51,14 @@
 
     <div class="row">
         <div class="ten columns offset-by-one alpha">
-            <h3>I. Distribution of People's Opinions</h3>
-            <p> As a quick way to express opinions on a talk, the TED website provides audience with 14 voting options covering positive, negative, and neutral ratings.
-            <br>  <b>Positive</b>: Beautiful, Courageous, Fascinating, Funny, Informative, Ingenious, Inspiring, Persuasive
-            <br>  <b>Negative</b>: Confusing, Longwinded, Obnoxious, Unconvincing
-            <br>  <b>Neutral</b>: OK, Jaw-dropping
-            <p> By looking into the total of votes for each rating, we found that <b>Inspiring</b>, <b>Informative</b>, and <b>Fascinating</b> have been frequently used in general, while the negative ones have been less present. Then, we identified the "Main Rating" of each talk (on which a talk has received the highest votes) and visualized the distribution of these main ratings. It reveals the same pattern as total votes.</p>
+            <h3>I. TED Talks are inspiring and Informative</h3>
+            <p>As mentioned above, TED Talks covers a variety of topics and are given by people around the world. However, is there anything common in their style and spirit? We ask ourselves the question: Among the 14 categories, which of them can best characterize TED Talk in general?</p>
+
+            <p>We looked at this question in two different approaches. First, we summed up rating for each category and created a bar chart (Figure 2). We can see that "Inspiring", "Informative", and "Fascinating" are the top 3 categories that are rated high. </p>
+
+            <p>Then, to answer questions like "How many TED talks are mainly Inspiring?", we aggregated the number of talks with each category as "main rating" and created a bubble chart (Figure 3). The three biggest circles are "Inspiring", "Informative", and "Fascinating", which means these are the top categories that TED Talks mainly rated as. </p>
+
+            <p>TED Talks are inspiring, informative and fascinating. </p>
         </div>
      <!-- <div class="seven columns offset-by-two question">
     </div> -->
