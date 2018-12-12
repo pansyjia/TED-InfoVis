@@ -36,11 +36,11 @@
             <h3>Introduction</h3>
              <p> TED talks are short, powerful talks (18 minutes or less) from expert speakers around the world. Under the slogan "Idea worth spreading", TED talks cover nearly all topics you can think of: education, business, science, tech, creativity, global issues, and many more. Nowadays TED Talks have successfully spreaded thousands of ideas to billions of people around the globe.</p>
 
-             <p>TED Website uses post-video question to collect audience's reaction towards a talk. At the end of each TED Talk video, user will be prompted to select one option from 14 categories under the question "How would you describe this talk"? These 14 categories are: Beautiful, Courageous, Fascinating, Funny, Informative, Ingenious, Inspiring, Persuasive, Confusing, Longwinded, Obnoxious, Unconvincing, OK, Jaw-dropping. Overtime, the number of "votes" for each category are aggregated as rating.</p>
+             <p>TED Website uses post-video question to collect audience's reaction towards a talk. At the end of each TED Talk video, user will be prompted to select one option from 14 categories under the question "How would you describe this talk"? These 14 categories are: Beautiful, Courageous, Fascinating, Funny, Informative, Ingenious, Inspiring, Persuasive, Confusing, Longwinded, Obnoxious, Unconvincing, OK, Jaw-dropping. Overtime, the number of "votes" for each category are aggregated as rating. These ratings can reflect the storytelling style of a TED Talks. </p>
 
              <p>Our team got a dataset which contains detailed information about 2550 TED Talks, which includes number of views, number of comments, description, tags, and also rating for each of the 14 categories. We looked into this dataset with specific interest in the 14 ratings and we expect to answer the following questions:</p>
 
-             <p>Which style can best characterize TED Talk?</p>
+             <p>Which storytelling style can best characterize TED Talk?</p>
 
 
              <div class="six columns offset-by-one">
@@ -77,8 +77,20 @@
 
     <div>
             <div class="ten columns offset-by-one alpha">
-                <h3>II. Mating Rating of Highly-viewed Talks</h3>
-                <p> Below you can select a specific topic relevant to your areas of expertise to get the top 5 talks falling under the topic. You can see the essential information (e.g. title, speaker, views, link) of the most-viewed talks, and get a sense of how did audience say about each talk. We found that ...... </p>
+                <h3>II. TED Talk Storytelling style and topics</h3>
+                <p>In general, TED Talks are inspiring and informative. But is it true for talks under all topics? To answer this question, we constructed this interactive small multiple chart where user can select a topic and look at 6 top talks under that topic. For each talk, the bar chart shows the rating from highest to lowest. Looking at the top rating categories for each talk, we had some interesting discovery.</p>
+
+                <p>While "Inspiring", "Informative" and "Fascinating" are common in all topics, we did find some patterns of rating categories related to topics.</p>
+
+
+                <p>First, for the top talks related to new Tech, they are often rated high on "Informative". For instance, "3d printing" and "robot". </p>
+
+                <p>Second, for top talks related to social issues, they are often rated high on Persuasive and Courageous.</p>
+
+                <p>Third, when it comes to talks related to art and music, they are often rated high on Beautiful. </p>
+
+                <p>We also found that for some serious topics that might not be eye-catching, for instance, alternative technology, the top talks are high on "Funny", "Jaw Dropping" and "Ingenious". </p>
+
             </div>
             <div class="twelve columns offset-by-one">
                     <div id="container1"></div>
@@ -108,18 +120,23 @@
 
        <div class="ten columns offset-by-one alpha">
        <h3>IV. Bivariate Scatter Plot</h3>
+
+
        <p> Now that we have a general idea of TED storytelling styles, let's have a closer look by comparing two of them at a time. Given two storytelling style (rating category), which one is related with more views?</p>
+
+       <p>We constructed some bivariate scatterplot. The two axis each represents a rating category, and the color of the dot represents the number of views (blue being low and red being high). The scatterplot tells not only the distribution of the talks between two rating categories but also help us compare the relationship between the two rating categories and views.</p>
+
        </div>
 
         <div class="row" style="margin-top:20px;">
         <div class="ten columns offset-by-one alpha">
             <div class="one-half column">
-                <h5> Visualization Title</h5>
-                <p>Descriptions here. </p>
+                <h5>"Funny" vs "Inspiring": Funny might be a new oppotunity</h5>
+                <p>We can see a lot of talks are rated high on "Inspiring" compared to "Funny". Most talks are relatively low on "Funny". However, two of the most viewed videos (red dot) are high on "Funny".</p>
             </div>
             <div class="one-half column">
-                <h5> Visualization Title</h5>
-                <p>Descriptions here. </p>
+                <h5>"Beautiful" vs "Informative"</h5>
+                <p>From the distribution, a lot more TED talks are rated high on "Informative". The red dots appear around the higher part of "Informative" but not on "Beautiful". Compared to "Beautiful","Informative" talks are more in quantity and have higher views. </p>
             </div>
          </div>
 
@@ -148,12 +165,12 @@
 
            <div class="ten columns offset-by-one alpha">
 
-       <h3>V. Explore yourself!</h3>
+       <h3>V. Compare two ratings of your choice!</h3>
         <div class="row">
             <br>
 
             <div>
-                <h5>Compare two ratings</h5>
+                <p>Good news! With the help of the interactive bivariate scatterplot, you can compare any two ratings of your choice and come up with your own insight.</p>
                 <p>Compare
                   <select class="dropdown" id="xaxis">
               <option value="Beautiful">Beautiful</option>
