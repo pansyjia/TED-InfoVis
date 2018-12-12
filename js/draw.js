@@ -41,6 +41,8 @@ function loadData1() {
   d3.csv("data/ted_clean.csv", function(d) {
     data = d;
     val = data;
+    selectBtn = "history";
+
     data.sort(function(x, y) { //sort the talks by views
       return d3.ascending(y.views);
     })
@@ -53,24 +55,31 @@ function loadData1() {
         }
       });
     setDropdownOptions(data); //set categories to be the dropdown options in the HTML
-    console.log(selectValue);
+
+    // console.log(selectValue);
     selectValue = d3.select('select').property('value');
     d3.select('#list').html("");
-    console.log(selectValue);
+    // console.log(selectValue);
     d3.select('#list')
       .append('p')
-      .html(getTopTalks(selectValue, data));
-
+      .html("<div class='twelve columns'>" + getTopTalks(selectValue, data) + "</div>");
 
     d3.select('.select') //update list on change of category
       .on('change', function() {
-
         selectValue = d3.select('select').property('value');
         d3.select('#list').html("");
         console.log(selectValue);
         getTopTalks(selectValue, data);
-
       });
+
+      // console.log(selectBtn);
+      // selectBtn = d3.select('button').property('value');
+      // d3.select('#list').html("");
+      // d3.select('#list')
+      //   .append('p')
+      //   .html(getTopTalks(selectBtn, data));
+  
+      
 
   });
 

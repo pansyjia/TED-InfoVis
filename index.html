@@ -43,10 +43,14 @@
              <p>Which storytelling style can best characterize TED Talk?</p>
 
 
-             <div class="six columns offset-by-one">
-             <img src="img/example.png" class= "example" alt="rate-example" height="500px">
+             <div class="row">
+                <div class="video-container">
+                            <iframe src="https://embed.ted.com/talks/james_veitch_this_is_what_happens_when_you_reply_to_spam_email" width="854" height="480"> </iframe>
+                           
+                     <img src="img/example.png" class= "example" alt="rate-example" height="280px" display="inline-blcok">   
             </div>
         </div>
+        <caption>The most-watched TED talk after normalizing views by the time the talks have been published on ted.com </caption>
     </div>
 
     <div class="row">
@@ -93,9 +97,16 @@
 
             </div>
             <div class="twelve columns offset-by-one">
+                    <button class="btn history" color="gray" value="history">History</button>
+                    <button class="btn Google">Google</button>
+                    <button class="btn history">History</button>
+                    <button class="btn Google">Google</button>
+                    <br>
+                    <br>
                     <div id="container1"></div>
                     <div class="outside">
-                    <div id="list"></div>
+                    <div id="list">
+                    </div>
                     </div>
 
             </div>
@@ -106,10 +117,10 @@
     <div class="row">
             <div class="ten columns offset-by-one alpha">
                 <h3>III. Correlation Heatmap</h3>
-                <p> Talks with a higher votes on Inspiring, Fascinating, and Informative tend to have a higher number of views, while talks which rated higher on Confusing, Jaw-dropping and Funny don't necessarily guarantee a higher views.</p>
+                <p> Talks with a higher votes on Inspiring, Fascinating, and Informative tend to have a higher number of views, while talks which rated higher on Confusing, Jaw-dropping and Funny don't necessarily guarantee a higher views. (iews and total votes of each rating have been normalized by the published-time of talks)</p>
             </div>
             <div class="six columns offset-by-four">
-                    <img src="img/cor.png" class= "heatmap" alt="bar-sum" height="500px">
+                    <img src="img/cor.png" class= "heatmap" alt="heatmap" height="500px">
             </div>
 
     </div>
@@ -120,12 +131,16 @@
 
        <div class="ten columns offset-by-one alpha">
        <h3>IV. Bivariate Scatter Plot</h3>
+<<<<<<< HEAD
 
 
        <p> Now that we have a general idea of TED storytelling styles, let's have a closer look by comparing two of them at a time. Given two storytelling style (rating category), which one is related with more views?</p>
 
        <p>We constructed some bivariate scatterplot. The two axis each represents a rating category, and the color of the dot represents the number of views (blue being low and red being high). The scatterplot tells not only the distribution of the talks between two rating categories but also help us compare the relationship between the two rating categories and views.</p>
 
+=======
+       <p> Now that we have a general idea of TED storytelling styles, let's have a closer look by comparing two of them at a time. Given two storytelling style (rating category), which one is related with more views? (iews and total votes of each rating have been normalized by the published-time of talks)</p>
+>>>>>>> d18fb543a86f56ba0eaad3ca590e5c6ac3533ef6
        </div>
 
         <div class="row" style="margin-top:20px;">
