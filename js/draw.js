@@ -20,9 +20,12 @@ var category_colors = {
   "OK": "#feac9d"
 }
 
+
 var rating_names = ["Beautiful", "Confusing", "Courageous", "Fascinating", "Funny", "Informative", "Ingenious", "Inspiring", "Jaw.dropping", "Longwinded", "OK", "Obnoxious", "Persuasive", "Unconvincing"]
 
 var selectValue = "3d printing";
+var xrating = "Beautiful"
+var yrating = "OK"
 
 $(document).ready(function() {
   // console.log("loaddata begin");
@@ -33,7 +36,6 @@ $(document).ready(function() {
 
 // // Loads the CSV file
 function loadData1() {
-  // console.log("HEY");
   // load the csv file
   // assign it to the data variable
   d3.csv("data/ted_clean.csv", function(d) {
@@ -57,10 +59,8 @@ function loadData1() {
     console.log(selectValue);
     d3.select('#list')
       .append('p')
-      // .text(function() { return getTopTalks(selectValue, data); });
       .html(getTopTalks(selectValue, data));
-    //console.log(talk_categories[0]);
-    // console.log(getTopTalks('art',data));
+
 
     d3.select('.select') //update list on change of category
       .on('change', function() {
@@ -81,6 +81,7 @@ function loadData1() {
 
 /////data for drawing scatter plot
 function loadData2() {
+
     d3.csv("data/ted_ratings.csv", function (d) {
         data2 = d;
         data2.forEach(function (talk) {
@@ -104,8 +105,28 @@ function loadData2() {
             talk.N_views = parseInt(talk.N_views);
         });
 
-        drawScatterPlot(data2);
+    drawScatterPlot(data2,xrating,yrating);
+
     });
+    d3.select('.dropdown') //update list on change of category
+      .on('change', function() {
+        //$("#divScatter3").empty();
+        comparex = d3.select('#xaxis').property('value');
+        comparey = d3.select('#yaxis').property('value');
+        //d3.select('#list').html("");
+        console.log(comparex, comparey);
+
+        // drawScatterPlot(data2,xrating,yrating);
+
+        // selectValue = d3.select('select').property('value');
+        // d3.select('#list').html("");
+        // console.log(selectValue);
+        // getTopTalks(selectValue, data);
+
+      });
+
+
+
 }
 
 
@@ -269,10 +290,14 @@ function setDropdownOptions(data) {
 //////////////////////////////////////////////////////////////////
 /////Scatter Plot///////
 //////////////////////////////////////////////////////////////////
-function drawScatterPlot(data2) {
+function drawScatterPlot(data2,x,y) {
+
+
+
   // drawScatterPlot(data2,xrat,yrat)
-  // var xraing=xrat; 
-  // var yrating=yrat;
+  xrating = x;
+  yrating = y;
+  console.log(xrating,yrating)
 
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = $("#scatterTransition3").width()  - margin.left - margin.right,
@@ -291,17 +316,18 @@ function drawScatterPlot(data2) {
 
 
   // Scale the range of the data
-  x.domain([0, d3.max(data2, function(d) { return d.Beautiful; })]);////////replace here/////////
-  y.domain([0, d3.max(data2, function(d) { return d.Confusing; })]);////////replace here/////////
+  x.domain([0, d3.max(data2, function(d) {return d[xrating]; })]);////////replace here/////////
+  y.domain([0, d3.max(data2, function(d) { return d[yrating]; })]);////////replace here/////////
 
-   ///gradient color -> distance 
+
+   ///gradient color -> distance
   var color = d3.scaleSequential(d3.interpolateViridis).domain([0,d3.max(data, function(d) { return d.views; })]);
-  
+
 //   const logScale = d3.scaleLog()
 //   .domain([1, 1000])
 // const colorScaleLog = d3.scaleSequential(
 //     (d) => d3.interpolateReds(logScale(d))
-//   ) 
+//   )
 
 
   var tooltip = d3.select("body").append("div").attr("class", "toolTip");
@@ -314,8 +340,8 @@ function drawScatterPlot(data2) {
       .attr("r", function(d){return Math.sqrt((d.views)/200000)})
       .attr("fill", function(d) { return color(d.views)})
       // .attr("fill", "#e62b1e")
-      .attr("cx", function(d) { return x(d.Beautiful); })////////replace here/////////
-      .attr("cy", function(d) { return y(d.Confusing); })////////replace here/////////
+      .attr("cx", function(d) { return x(d[xrating]); })////////replace here/////////
+      .attr("cy", function(d) { return y(d[yrating]); })////////replace here/////////
       .attr("opacity", "1")
       .on("mousemove", function (d) {
               d3.select(this).attr("opacity", "0.7");
@@ -335,9 +361,9 @@ function drawScatterPlot(data2) {
       .call(d3.axisBottom(x));
 
      // text label for the x axis
-     svg.append("text")             
+     svg.append("text")
      .attr("transform",
-     "translate(" + (width/2) + " ," + 
+     "translate(" + (width/2) + " ," +
                     (height + margin.top/2 + 20) + ")")
      .style("text-anchor", "middle")
      .text("Beautiful"); /////replace x here
@@ -345,7 +371,7 @@ function drawScatterPlot(data2) {
     // Add the y Axis
     svg.append("g")
         .call(d3.axisLeft(y));
-    
+
     // text label for the y axis
     svg.append("text")
         .attr("transform", "rotate(-90)")
