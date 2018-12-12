@@ -78,8 +78,8 @@ function loadData1() {
       // d3.select('#list')
       //   .append('p')
       //   .html(getTopTalks(selectBtn, data));
-  
-      
+
+
 
   });
 
@@ -354,7 +354,7 @@ function drawScatterPlot(data2,x,y) {
       //.attr("r", function(d){return Math.sqrt((d.views)/200000)})
       .attr("r", 6)
       .attr("fill", function(d) { return color(d.views)})
-      .style("opacity","0.8")
+      .style("opacity","0.5")
       // .attr("fill", "#e62b1e")
       .attr("cx", function(d) { return x(d[xrating]); })////////replace here/////////
       .attr("cy", function(d) { return y(d[yrating]); })////////replace here/////////

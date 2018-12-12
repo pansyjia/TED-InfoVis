@@ -182,3 +182,6 @@ text {
     align-items: center;
 }
 
+.highlight{
+     opacity: 1 !important;
+}
