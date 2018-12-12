@@ -24,8 +24,8 @@ var category_colors = {
 var rating_names = ["Beautiful", "Confusing", "Courageous", "Fascinating", "Funny", "Informative", "Ingenious", "Inspiring", "Jaw.dropping", "Longwinded", "OK", "Obnoxious", "Persuasive", "Unconvincing"]
 
 var selectValue = "3d printing";
-var xrating = "Beautiful"
-var yrating = "OK"
+var xrating = "Informative"
+var yrating = "Funny"
 
 $(document).ready(function() {
   // console.log("loaddata begin");
