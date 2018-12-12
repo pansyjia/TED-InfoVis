@@ -93,7 +93,7 @@ function loadData2() {
             talk.Informative = parseInt(talk.Informative);
             talk.Ingenious = parseInt(talk.Ingenious);
             talk.Inspiring = parseInt(talk.Inspiring);
-            // talk.Jaw.dropping = parseInt(talk.Jaw.dropping);
+            talk["Jaw.dropping"] = parseInt(talk["Jaw.dropping"]);
             talk.Longwinded = parseInt(talk.Longwinded);
             talk.OK = parseInt(talk.OK);
             talk.Obnoxious = parseInt(talk.Obnoxious);
@@ -297,14 +297,11 @@ function setDropdownOptions(data) {
 function drawScatterPlot(data2,x,y) {
   $("#scatterTransition3").empty();
 
-
-
-  // drawScatterPlot(data2,xrat,yrat)
   xrating = x;
   yrating = y;
   console.log(xrating,yrating)
 
-  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+  var margin = {top: 20, right: 20, bottom: 30, left: 60},
   width = $("#scatterTransition3").width()  - margin.left - margin.right,
   height = $("#scatterTransition3").height()  - margin.top - margin.bottom;
 
@@ -326,7 +323,10 @@ function drawScatterPlot(data2,x,y) {
 
 
    ///gradient color -> distance
-  var color = d3.scaleSequential(d3.interpolateViridis).domain([0,d3.max(data, function(d) { return d.views; })]);
+  // var color = d3.scaleSequential(d3.interpolateViridis).domain([0,d3.max(data, function(d) { return d.views; })]);
+  color = d3.scaleLinear().domain([0, d3.max(data2, function(d) { return d.views; })])
+      .interpolate(d3.interpolateHcl)
+      .range([d3.rgb("#9ddff2"), d3.rgb("#f70707")]);
 
 //   const logScale = d3.scaleLog()
 //   .domain([1, 1000])
@@ -342,20 +342,23 @@ function drawScatterPlot(data2,x,y) {
       .data(data2)
       .enter().append("circle")
       // .attr("r", 3)
-      .attr("r", function(d){return Math.sqrt((d.views)/200000)})
+      //.attr("r", function(d){return Math.sqrt((d.views)/200000)})
+      .attr("r", 6)
       .attr("fill", function(d) { return color(d.views)})
+      .style("opacity","0.8")
       // .attr("fill", "#e62b1e")
       .attr("cx", function(d) { return x(d[xrating]); })////////replace here/////////
       .attr("cy", function(d) { return y(d[yrating]); })////////replace here/////////
       .attr("opacity", "1")
       .on("mousemove", function (d) {
-              d3.select(this).attr("opacity", "0.7");
+              d3.select(this).attr("fill", "#666666");
               tooltip.style("left", d3.event.pageX - 50 + "px")
-                  .style("top", d3.event.pageY - 100 + "px")
+                  .style("top", d3.event.pageY - 120 + "px")
                   .style("display", "inline-block")
                   .html("<div><b>" +"Title" + "</b> : " + (d.title) + "</div> " + "<div><b>" +"Main Speaker" + "</b> : " + (d.main_speaker)+ "</div> " +"<div><b>" + "Views" + "</b> : " + (d.views) + "</div> ");
       })
       .on("mouseout", function (d) {
+            d3.select(this).attr("fill", function(d) { return color(d.views)});
               d3.select(this).attr("opacity", "1");
               tooltip.style("display", "none");
       });
