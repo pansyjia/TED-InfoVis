@@ -19,9 +19,16 @@ img.logo{
 
 h1{
     color:#ffffff;
-    font-family: "Helvetica Neue Custom", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 30px;
-    font-weight: 300;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+h2{
+    color:#ffffff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 250;
 }
 
 h3{
@@ -37,7 +44,7 @@ h5 {
     font-weight: bold;
     font-family: "Helvetica Neue Custom", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 500;
-    
+
 }
 
 .info-label {
@@ -56,7 +63,7 @@ h6 {
 
 p{
     color:#404040;
-    font-size:17px;
+    font-size:20px;
 }
 
 
@@ -146,13 +153,13 @@ fieldset {
 }
 
 button {
-    background-color: #ffffff !important; 
+    background-color: #ffffff !important;
     color: #140078 !important;
     border: 1px solid #808080 !important;
 }
 
 button:hover  {
-    background-color: #140078!important; 
+    background-color: #140078!important;
     color: #ffffff !important;
     border: 0.5px solid #808080!important;
 }
@@ -177,7 +184,7 @@ text {
 .githubRepo .copyright {
     display: block;
     margin: auto;
-} 
+}
 
 .outside{
     display: grid;
@@ -185,4 +192,3 @@ text {
     padding-left: 5%;
     align-items: center;
 }
-
