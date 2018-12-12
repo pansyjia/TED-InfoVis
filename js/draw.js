@@ -62,7 +62,7 @@ function loadData1() {
     // console.log(selectValue);
     d3.select('#list')
       .append('p')
-      .html("<div class='twelve columns'>" + getTopTalks(selectValue, data) + "</div>");
+      .html(getTopTalks(selectValue, data));
 
     d3.select('.select') //update list on change of category
       .on('change', function() {
@@ -200,9 +200,9 @@ function getTopTalks(category, data) {
       list += (" <a href= " + d['url'] + ">Click to Watch</a>");
       list += '<br>';
 
-
-      talk_info = d3.select('#list').append("p").attr("class", "talk_info")
-      talk_chart = d3.select('#list').append("div").attr("class", "talk_chart")
+      one_talk = d3.select('#container1').append("div").attr("class", "two column").attr("class", "one-talk")
+      talk_info =  one_talk.append("p").attr("class", "talk_info")
+      talk_chart =  one_talk.append("div").attr("class", "talk_chart")
       item_array.push(list);
       talk_info.html(list);
 

@@ -182,3 +182,7 @@ text {
     align-items: center;
 }
 
+.one-talk {
+    display: inline-block;
+    margin: 2em 2em;
+}
