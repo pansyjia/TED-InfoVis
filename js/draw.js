@@ -108,13 +108,17 @@ function loadData2() {
     drawScatterPlot(data2,xrating,yrating);
 
     });
-    d3.select('.dropdown') //update list on change of category
+
+    d3.selectAll('.dropdown') //update list on change of category
       .on('change', function() {
-        //$("#divScatter3").empty();
-        comparex = d3.select('#xaxis').property('value');
-        comparey = d3.select('#yaxis').property('value');
+
+
+        var comparex = d3.select('#xaxis').property('value');
+        var comparey = d3.select('#yaxis').property('value');
         //d3.select('#list').html("");
         console.log(comparex, comparey);
+        drawScatterPlot(data2,comparex,comparey)
+
 
         // drawScatterPlot(data2,xrating,yrating);
 
@@ -291,6 +295,7 @@ function setDropdownOptions(data) {
 /////Scatter Plot///////
 //////////////////////////////////////////////////////////////////
 function drawScatterPlot(data2,x,y) {
+  $("#scatterTransition3").empty();
 
 
 
@@ -366,7 +371,7 @@ function drawScatterPlot(data2,x,y) {
      "translate(" + (width/2) + " ," +
                     (height + margin.top/2 + 20) + ")")
      .style("text-anchor", "middle")
-     .text("Beautiful"); /////replace x here
+     .text(xrating); /////replace x here
 
     // Add the y Axis
     svg.append("g")
@@ -379,7 +384,7 @@ function drawScatterPlot(data2,x,y) {
         .attr("x",0 - (height / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
-        .text("Confusing"); /////replace y here
+        .text(yrating); /////replace y here
 
 
 }
