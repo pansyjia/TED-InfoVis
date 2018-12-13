@@ -124,17 +124,9 @@ function loadData2() {
 
         var comparex = d3.select('#xaxis').property('value');
         var comparey = d3.select('#yaxis').property('value');
-        //d3.select('#list').html("");
         console.log(comparex, comparey);
         drawScatterPlot(data2,comparex,comparey)
 
-
-        // drawScatterPlot(data2,xrating,yrating);
-
-        // selectValue = d3.select('select').property('value');
-        // d3.select('#list').html("");
-        // console.log(selectValue);
-        // getTopTalks(selectValue, data);
 
       });
 
