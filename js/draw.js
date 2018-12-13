@@ -185,7 +185,7 @@ function getTopTalks(category, data) {
 
       //create list
       list += '<br>';
-      list += ("<strong>Title </strong>: " + (d['title']));
+      list += ("<strong>Title</strong>: " + (d['title']));
       list += '<br>';
       list += (" <strong>Speaker</strong>: " + d['main_speaker']);
       list += '<br>';
