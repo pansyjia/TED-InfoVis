@@ -198,3 +198,11 @@ text {
 .select{
     display: block;
 }
+
+footer {
+    padding: 20px;
+}
+
+#bulletpoints {
+    font-size: 20px;
+}
