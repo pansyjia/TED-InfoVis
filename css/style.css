@@ -189,3 +189,12 @@ text {
 /* ul{
   font-size: 20px;
 } */
+
+.one-talk {
+    display: inline-block;
+    width: 30%;
+}
+
+.select{
+    display: block;
+}

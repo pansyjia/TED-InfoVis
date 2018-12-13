@@ -24,6 +24,7 @@ var category_colors = {
 var rating_names = ["Beautiful", "Confusing", "Courageous", "Fascinating", "Funny", "Informative", "Ingenious", "Inspiring", "Jaw.dropping", "Longwinded", "OK", "Obnoxious", "Persuasive", "Unconvincing"]
 
 var selectValue = "3d printing";
+//var selectBtn = "history";
 var xrating = "Informative"
 var yrating = "Funny"
 
@@ -41,7 +42,7 @@ function loadData1() {
   d3.csv("data/ted_clean.csv", function(d) {
     data = d;
     val = data;
-    selectBtn = "history";
+   
 
     data.sort(function(x, y) { //sort the talks by views
       return d3.ascending(y.views);
@@ -141,12 +142,13 @@ function loadData2() {
 ///////////////////////////////////////////////////////////////////
 function getTopTalks(category, data) {
   console.log(category);
+  
   //set up margin and scale
   var margin = {
       top: 10,
       right: 10,
       bottom: 80,
-      left: 20
+      left: 50
     },
     width = 350 - margin.left - margin.right,
     height = 250 - margin.top - margin.bottom;
@@ -192,9 +194,11 @@ function getTopTalks(category, data) {
       list += (" <a href= " + d['url'] + ">Click to Watch</a>");
       list += '<br>';
 
-      one_talk = d3.select('#container1').append("div").attr("class", "two column").attr("class", "one-talk")
+      one_talk = d3.select('#list').append("div").attr("class", "two column").attr("class", "one-talk")
       talk_info =  one_talk.append("p").attr("class", "talk_info")
       talk_chart =  one_talk.append("div").attr("class", "talk_chart")
+      // talk_info =  d3.select('#container1').append("p").attr("class", "talk_info")
+      // talk_chart =  d3.select('#container1').append("div").attr("class", "talk_chart")
       item_array.push(list);
       talk_info.html(list);
 
