@@ -166,7 +166,7 @@ button:hover  {
 
 
 text {
-    font-size: 11px;
+    font-size: 12px;
 }
 
 
@@ -185,3 +185,7 @@ text {
 .highlight{
      opacity: 1 !important;
 }
+
+/* ul{
+  font-size: 20px;
+} */
