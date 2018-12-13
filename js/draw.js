@@ -42,7 +42,7 @@ function loadData1() {
   d3.csv("data/ted_clean.csv", function(d) {
     data = d;
     val = data;
-   
+
 
     data.sort(function(x, y) { //sort the talks by views
       return d3.ascending(y.views);
@@ -142,7 +142,7 @@ function loadData2() {
 ///////////////////////////////////////////////////////////////////
 function getTopTalks(category, data) {
   console.log(category);
-  
+
   //set up margin and scale
   var margin = {
       top: 10,
